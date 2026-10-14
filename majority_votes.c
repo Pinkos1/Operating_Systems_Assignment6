@@ -53,7 +53,33 @@ int main() {
         }
     }
 
+
+
+
         // Repeat voting for each round
     for (int round = 1; round <= rounds; round++) {
 
-        
+        if (voter_id == -1) {
+
+            // Judge collects the votes
+            int yes_count = 0; // changed from yes to be more descriptive
+            int no_count = 0;  // added a separate no count instead of math
+            int vote_val;
+
+  printf("\n------ Round %d -------\n", round);
+            fflush(stdout);
+
+            for (int i = 0; i < voters; i++) {
+
+                read(pipes[i][0], &vote_val, sizeof(vote_val));
+
+                // checking each vote manually
+                if (vote_val == 1) {
+                    yes_count++;
+                }
+                else {
+                    no_count++;
+                }
+            }
+
+            
