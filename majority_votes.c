@@ -93,3 +93,7 @@ int main() {
             else {
                 printf("--- Round %d: The voting result is a TIE.\n", round);
             }
+
+                 fflush(stdout);
+
+        }
