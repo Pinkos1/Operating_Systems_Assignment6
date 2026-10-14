@@ -27,4 +27,7 @@ Enter the number of voters (at least 3) and the number of rounds.
 
 
 ### Diagram
+![Program Output](images/diagram.png)
+
+### Example Output
 ![Program Output](images/output.png)
