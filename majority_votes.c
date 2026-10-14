@@ -1,8 +1,8 @@
 
-// Adam Pinkos
-// CS4420 - Operating Systems
-// Assignment 4
-// October 14th, 2026
+ // Adam Pinkos
+ // CS4420 - Operating Systems
+ // Assignment 4
+ // October 14th, 2026
 
 
 
@@ -10,18 +10,16 @@
 #include <unistd.h>
 
 int main() {
-    
-    // intialized voters and rounds 
-    int voters; 
-    int rounds; 
-    
+
+    // intialized voters and rounds
+    int voters;
+    int rounds;
 
     printf("Enter the number of voters: ");
     scanf("%d", &voters);
-    
+
     printf("Enter the number of rounds: ");
     scanf("%d", &rounds);
-
 
 
     // Create pipes for the voters
@@ -39,24 +37,22 @@ int main() {
     int p; // process id storage
 
     for (int i = 0; i < voters; i++) {
-        
+
         p = fork();
-        
+
         // check if child
         if (p == 0) {
             voter_id = i;
             // printf("i am child %d\n", voter_id);
             break;
-        } 
+        }
         else {
             // parent process does nothing here for now
         }
     }
 
 
-
-
-        // Repeat voting for each round
+    // Repeat voting for each round
     for (int round = 1; round <= rounds; round++) {
 
         if (voter_id == -1) {
@@ -66,7 +62,7 @@ int main() {
             int no_count = 0;  // added a separate no count instead of math
             int vote_val;
 
-  printf("\n------ Round %d -------\n", round);
+            printf("\n------ Round %d -------\n", round);
             fflush(stdout);
 
             for (int i = 0; i < voters; i++) {
@@ -82,7 +78,7 @@ int main() {
                 }
             }
 
-            
+
             // determines the majority
             if (yes_count > no_count) {
                 printf("--- Round %d: The voting result is a YES.\n", round);
@@ -94,11 +90,10 @@ int main() {
                 printf("--- Round %d: The voting result is a TIE.\n", round);
             }
 
-                 fflush(stdout);
+            fflush(stdout);
 
         }
-
-         else {
+        else {
 
             // Voter randomly chooses YES (1) or NO (0)
             int my_vote = rand() % 2;
@@ -116,3 +111,24 @@ int main() {
             write(pipes[voter_id][1], &my_vote, sizeof(my_vote));
         }
     }
+
+
+    // Close remaining pipes
+    if (voter_id == -1) {
+
+        for (int i = 0; i < voters; i++) {
+            close(pipes[i][0]);
+        }
+
+        // Judge waits for all voters to finish
+        for (int i = 0; i < voters; i++) {
+            wait(NULL);
+        }
+
+    }
+    else {
+        close(pipes[voter_id][1]);
+    }
+
+    return 0;
+}
