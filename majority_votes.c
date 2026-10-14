@@ -83,3 +83,13 @@ int main() {
             }
 
             
+            // determines the majority
+            if (yes_count > no_count) {
+                printf("--- Round %d: The voting result is a YES.\n", round);
+            }
+            else if (no_count > yes_count) {
+                printf("--- Round %d: The voting result is a NO.\n", round);
+            }
+            else {
+                printf("--- Round %d: The voting result is a TIE.\n", round);
+            }
