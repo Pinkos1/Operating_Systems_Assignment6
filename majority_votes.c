@@ -17,17 +17,6 @@ int main() {
     
     printf("Enter the number of rounds: ");
     scanf("%d", &r);
-    
-    printf("\n");
-    printf("voters are: ");
-    printf("%d", v);
-    printf("\n");
-    printf("rounds are: ");
-    printf("%d", r);
-    
-    // just to keep the black box open
-    getchar();
-    getchar();
 
     return 0;
 }
