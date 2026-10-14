@@ -97,3 +97,22 @@ int main() {
                  fflush(stdout);
 
         }
+
+         else {
+
+            // Voter randomly chooses YES (1) or NO (0)
+            int my_vote = rand() % 2;
+
+            if (my_vote == 1) {
+                printf("Round %d: Voter %d votes: YES\n", round, voter_id);
+            }
+            else {
+                printf("Round %d: Voter %d votes: NO\n", round, voter_id);
+            }
+
+            fflush(stdout);
+
+            // Voter sends one vote to the judge
+            write(pipes[voter_id][1], &my_vote, sizeof(my_vote));
+        }
+    }
